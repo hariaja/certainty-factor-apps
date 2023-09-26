@@ -70,6 +70,7 @@ class UserDataTable extends DataTable
         'type' => 'GET',
         'data' => "
           function(data) {
+            data.roles = $('select[name=roles]').val();
             data.status = $('select[name=status]').val();
           }"
       ])

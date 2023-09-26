@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Consoles\Settings;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Helpers\Enums\RoleType;
 use App\Helpers\Enums\DecideType;
 use App\Services\User\UserService;
 use App\Http\Controllers\Controller;
 use App\DataTables\Scopes\StatusAccountFilter;
 use App\DataTables\Consoles\Settings\UserDataTable;
+use App\DataTables\Scopes\RoleAccountFilter;
 use App\Http\Requests\Consoles\Settings\UserRequest;
 
 class UserController extends Controller
@@ -30,10 +32,12 @@ class UserController extends Controller
   public function index(UserDataTable $dataTable, Request $request)
   {
     $statusUserTypes = DecideType::toArray();
+    $roleTypes = RoleType::toArray(1, 2);
 
     return $dataTable->addScopes([
+      new RoleAccountFilter($request),
       new StatusAccountFilter($request),
-    ])->render('consoles.settings.users.index', compact('statusUserTypes'));
+    ])->render('consoles.settings.users.index', compact('statusUserTypes', 'roleTypes'));
   }
 
   /**

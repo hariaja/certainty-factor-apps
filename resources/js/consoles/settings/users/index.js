@@ -9,6 +9,11 @@ $(() => {
         table.draw();
         e.preventDefault();
     });
+
+    $("#roles").on("change", function (e) {
+        table.draw();
+        e.preventDefault();
+    });
 });
 
 function deleteUser(url) {
