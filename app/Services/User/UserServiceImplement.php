@@ -5,12 +5,14 @@ namespace App\Services\User;
 use App\Helpers\Helper;
 use InvalidArgumentException;
 use App\Helpers\Enums\DecideType;
+use App\Helpers\Enums\RoleType;
 use Illuminate\Support\Facades\DB;
 use LaravelEasyRepository\Service;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\User\UserRepository;
 use App\Repositories\Client\ClientRepository;
+use Illuminate\Support\Facades\Hash;
 
 class UserServiceImplement extends Service implements UserService
 {
@@ -123,5 +125,42 @@ class UserServiceImplement extends Service implements UserService
       Log::info($e->getMessage());
       throw new InvalidArgumentException(trans('session.log.error'));
     }
+  }
+
+  public function handleUserRegister($request)
+  {
+    DB::beginTransaction();
+    try {
+
+      // Handle Upload Avatar
+      $avatar = Helper::uploadFile($request, "images/users", null);
+
+      $payload = $request->validated();
+      $payload['avatar'] = $avatar;
+      $payload['password'] = Hash::make($request->password);
+
+      // Create data to users table
+      $user = $this->mainRepository->create($payload);
+      $user->assignRole(RoleType::USER->value);
+
+      // Payload client
+      $insert = [
+        'user_id' => $user->id,
+        'phone' => $payload['phone'],
+        'gender' => $payload['gender'],
+        'place_of_birth' => $payload['place_of_birth'],
+        'date_of_birth' => $payload['date_of_birth'],
+        'occupation' => $payload['occupation'],
+      ];
+
+      // Insert data to clients table
+      $this->clientRepository->create($insert);
+    } catch (\Exception $e) {
+      DB::rollBack();
+      Log::info($e->getMessage());
+      throw new InvalidArgumentException(trans('session.log.error'));
+    }
+    DB::commit();
+    return $user;
   }
 }

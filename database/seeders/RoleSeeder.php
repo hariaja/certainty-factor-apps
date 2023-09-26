@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use App\Models\Permission;
 use App\Helpers\Enums\RoleType;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\PermissionRegistrar;
+use App\Helpers\Enums\Permissions\OfficerPermissionList;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RoleSeeder extends Seeder
@@ -28,5 +30,9 @@ class RoleSeeder extends Seeder
         'guard_name' => 'web'
       ]);
     endforeach;
+
+    // Give Permissions
+    $officer = $roles->firstWhere('name', RoleType::OFFICER->value);
+    $officer->syncPermissions(Permission::whereIn('name', OfficerPermissionList::permissions())->get());
   }
 }

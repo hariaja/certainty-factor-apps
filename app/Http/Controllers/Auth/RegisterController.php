@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Helpers\Enums\RoleType;
+use App\Helpers\Enums\GenderType;
+use Illuminate\Http\JsonResponse;
+use App\Services\User\UserService;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\User\RegisterRequest;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 
 class RegisterController extends Controller
 {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Register Controller
     |--------------------------------------------------------------------------
@@ -22,52 +32,78 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+  use RedirectsUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
+  /**
+   * Where to redirect users after registration.
+   *
+   * @var string
+   */
+  protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct(
+    protected UserService $userService,
+  ) {
+    $this->middleware('guest');
+  }
+
+  /**
+   * Show the application registration form.
+   *
+   * @return \Illuminate\View\View
+   */
+  public function showRegistrationForm(): View
+  {
+    $genders = GenderType::toArray();
+
+    return view('auth.register', compact('genders'));
+  }
+
+  /**
+   * Handle a registration request for the application.
+   */
+  public function register(RegisterRequest $request): RedirectResponse
+  {
+    event(
+      new Registered(
+        $user = $this->userService->handleUserRegister($request)
+      )
+    );
+
+    $this->guard()->login($user);
+    if ($response = $this->registered($request, $user)) {
+      return $response;
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+    return $request->wantsJson() ? new JsonResponse([], 201) : redirect($this->redirectPath());
+  }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+  /**
+   * Get the guard to be used during registration.
+   *
+   * @return \Illuminate\Contracts\Auth\StatefulGuard
+   */
+  protected function guard()
+  {
+    return Auth::guard();
+  }
+
+  /**
+   * The user has been registered.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  mixed  $user
+   * @return mixed
+   */
+  protected function registered(Request $request, $user)
+  {
+    if ($user->hasRole(RoleType::USER->value)) {
+      return redirect(route('users.home'));
     }
+  }
 }

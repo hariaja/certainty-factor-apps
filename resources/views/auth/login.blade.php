@@ -43,9 +43,23 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-lg btn-alt-primary w-100 py-3 fw-semibold" id="submit-button">
-            {{ trans('Masuk Aplikasi') }}
-          </button>
+          <div class="row g-sm mb-4">
+            <div class="col-12 mb-2">
+              <button type="submit" class="btn btn-lg btn-alt-primary w-100 py-3 fw-semibold" id="submit-button">
+                {{ trans('Masuk Aplikasi') }}
+              </button>
+            </div>
+            <div class="my-3">
+              <div class="divider-container">
+                <div class="divider-line"></div>
+                <div class="divider-text fw-bold">{{ trans('Atau') }}</div>
+                <div class="divider-line"></div>
+              </div>
+            </div>
+            <div class="text-center">
+              <a href="{{ route('register') }}" class="link-fx fw-bold">{{ trans('Buat Akun Baru Disini') }}</a>
+            </div>
+          </div>
 
         </form>
       </div>

@@ -65,3 +65,18 @@
 .toggle-password:hover {
     cursor: pointer;
 }
+
+.divider-container {
+    display: flex;
+    align-items: center;
+}
+
+.divider-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #000;
+}
+
+.divider-text {
+    margin: 0 16px;
+}
