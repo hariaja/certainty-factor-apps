@@ -15,22 +15,22 @@ trait HandleChangePassword
    *
    * @return \Illuminate\View\View
    */
-  // public function showChangePasswordForm(User $user)
-  // {
-  //   return view('consoles.settings.passwords.edit', compact('user'));
-  // }
+  public function showChangePasswordForm(User $user)
+  {
+    return view('consoles.settings.passwords.edit', compact('user'));
+  }
 
-  // public function store(PasswordRequest $request)
-  // {
-  //   $user = User::findOrFail(me()->id);
+  public function store(PasswordRequest $request)
+  {
+    $user = User::findOrFail(me()->id);
 
-  //   $user->updateOrFail([
-  //     'password' => Hash::make($request->password)
-  //   ]);
+    $user->updateOrFail([
+      'password' => Hash::make($request->password)
+    ]);
 
-  //   Auth::guard()->logout();
-  //   $request->session()->invalidate();
-  //   $request->session()->regenerateToken();
-  //   return $request->wantsJson() ? new JsonResponse([], 204) : redirect()->route('login')->withSuccess(trans('Berhasil memperbaharui kata sandi anda. Silahkan login ulang.'));
-  // }
+    Auth::guard()->logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return $request->wantsJson() ? new JsonResponse([], 204) : redirect()->route('login')->withSuccess(trans('Berhasil memperbaharui kata sandi anda. Silahkan login ulang.'));
+  }
 }
