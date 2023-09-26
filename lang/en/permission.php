@@ -24,4 +24,15 @@ return [
     'delete' => 'Hapus Permanen Peran yang sudah Terhapus dari penyimpanan',
     'restore' => 'Restore Data Peran yang ditentukan dari penyimpanan yang sudah dihapus',
   ],
+
+  'disturbances' => [
+    'name' => 'Management Gangguan',
+    'index' => 'Menampilkan daftar Gangguan',
+    'show' => 'Menampilkan Detail Gangguan yang ditentukan',
+    'edit' => 'Tampilkan formulir untuk mengedit Gangguan yang ditentukan',
+    'update' => 'Perbarui Gangguan yang ditentukan dalam penyimpanan',
+    'destroy' => 'Hapus Gangguan yang ditentukan dari penyimpanan',
+    'delete' => 'Hapus Permanen Gangguan yang sudah Terhapus dari penyimpanan',
+    'restore' => 'Restore Data Gangguan yang ditentukan dari penyimpanan yang sudah dihapus',
+  ],
 ];

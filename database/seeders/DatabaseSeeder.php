@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
       AdminSeeder::class,
       OfficerSeeder::class,
       UserSeeder::class,
+      DisturbanceSeeder::class,
     ]);
   }
 }

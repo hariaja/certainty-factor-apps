@@ -26,4 +26,13 @@ return [
     'show' => 'Detail Role & Permission',
     'delete' => 'Hapus Role & Permission',
   ],
+
+  'disturbances' => [
+    'title' => 'Gangguan',
+    'index' => 'Daftar Data Gangguan',
+    'create' => 'Tambah Data Gangguan',
+    'edit' => 'Ubah Data Gangguan',
+    'show' => 'Detail Data Gangguan',
+    'delete' => 'Hapus Gangguan',
+  ],
 ];
