@@ -187,8 +187,9 @@ return [
     // 'Example' => App\Facades\Example::class,
     'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
     'RoleType' => App\Helpers\Enums\RoleType::class,
-    'DecideType' => App\Helpers\Enum\DecideType::class,
-    'GenderType' => App\Helpers\Enum\GenderType::class,
+    'DecideType' => App\Helpers\Enums\DecideType::class,
+    'GenderType' => App\Helpers\Enums\GenderType::class,
+    'Helper' => App\Helpers\Helper::class,
   ])->toArray(),
 
 ];

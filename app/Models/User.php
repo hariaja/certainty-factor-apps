@@ -10,8 +10,10 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -119,6 +121,36 @@ class User extends Authenticatable
     return $query->whereDoesntHave('roles', function ($row) {
       $row->where('name', RoleType::ADMIN->value);
     });
+  }
+
+  /**
+   * Declar status label.
+   *
+   * @return Attribute
+   */
+  public function statusLabel(): Attribute
+  {
+    $statusLabel = [
+      0 => "<span class='badge text-danger'>Inactive</span>",
+      1 => "<span class='badge text-success'>Active</span>",
+    ];
+
+    return Attribute::make(
+      get: fn () => $statusLabel[$this->status] ?? 'Tidak Diketahui',
+    );
+  }
+
+  /**
+   * Scope a query to only include active users.
+   */
+  public function scopeActive($data)
+  {
+    return $data->where('status', true);
+  }
+
+  public function getActive(): Collection
+  {
+    return $this->active()->get();
   }
 
   /**

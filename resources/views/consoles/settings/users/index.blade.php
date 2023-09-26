@@ -1,0 +1,51 @@
+@extends('layouts.app')
+@section('title', trans('page.users.title'))
+@section('hero')
+<div class="content content-full">
+  <h2 class="content-heading">
+    {{ trans('page.users.title') }}
+    <nav class="breadcrumb push my-0">
+      {{ Breadcrumbs::render('users.index') }}
+    </nav>
+  </h2>
+</div>
+@endsection
+@section('content')
+<div class="block block-rounded">
+  <div class="block-header block-header-default">
+    <h3 class="block-title">
+      {{ trans('page.users.index') }}
+    </h3>
+  </div>
+  <div class="block-content">
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="mb-4">
+          <label for="status" class="form-label">{{ trans('Filter Berdasarkan Status Akun') }}</label>
+          <select type="text" class="form-select" name="status" id="status">
+            <option value="{{ Helper::ALL }}">{{ Helper::ALL }}</option>
+            @foreach ($statusUserTypes as $item)
+            <option value="{{ $item }}">{{ $item ? ucfirst('Active') : ucfirst('Inactive') }}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-3">
+      {{ $dataTable->table() }}
+    </div>
+
+  </div>
+</div>
+@endsection
+@push('javascript')
+{{ $dataTable->scripts() }}
+@vite('resources/js/consoles/settings/users/index.js')
+<script>
+  var urlStatus = "{{ route('users.status', ':uuid') }}"
+  var urlDestroy = "{{ route('users.destroy', ':uuid') }}"
+
+</script>
+@endpush
