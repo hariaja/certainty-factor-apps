@@ -24,6 +24,8 @@ class PermissionSeeder extends Seeder
     $permissionCategoryId = [
       'users' => 1,
       'roles' => 2,
+      'disturbances' => 3,
+      'degrees' => 4,
     ];
 
     // Masukkan atau simpan ke tabel permissions

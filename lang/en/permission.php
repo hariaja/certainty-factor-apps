@@ -35,4 +35,15 @@ return [
     'delete' => 'Hapus Permanen Gangguan yang sudah Terhapus dari penyimpanan',
     'restore' => 'Restore Data Gangguan yang ditentukan dari penyimpanan yang sudah dihapus',
   ],
+
+  'degrees' => [
+    'name' => 'Management Derajat',
+    'index' => 'Menampilkan daftar Derajat',
+    'show' => 'Menampilkan Detail Derajat yang ditentukan',
+    'edit' => 'Tampilkan formulir untuk mengedit Derajat yang ditentukan',
+    'update' => 'Perbarui Derajat yang ditentukan dalam penyimpanan',
+    'destroy' => 'Hapus Derajat yang ditentukan dari penyimpanan',
+    'delete' => 'Hapus Permanen Derajat yang sudah Terhapus dari penyimpanan',
+    'restore' => 'Restore Data Derajat yang ditentukan dari penyimpanan yang sudah dihapus',
+  ],
 ];

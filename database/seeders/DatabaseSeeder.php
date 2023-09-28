@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
       OfficerSeeder::class,
       UserSeeder::class,
       DisturbanceSeeder::class,
+      DegreeSeeder::class,
     ]);
   }
 }

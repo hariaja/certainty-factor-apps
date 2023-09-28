@@ -23,6 +23,23 @@ class PermissionList
       'roles.edit',
       'roles.update',
       'roles.destroy',
+
+      // Halaman Disturbance
+      'disturbances.index',
+      'disturbances.create',
+      'disturbances.store',
+      'disturbances.show',
+      'disturbances.edit',
+      'disturbances.update',
+      'disturbances.destroy',
+
+      // Halaman Degree
+      'degrees.index',
+      'degrees.create',
+      'degrees.store',
+      'degrees.edit',
+      'degrees.update',
+      'degrees.destroy',
     ];
   }
 }

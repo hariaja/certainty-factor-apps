@@ -98,6 +98,13 @@
                 </a>
               </li>
               @endcan
+              @can('degrees.index')
+              <li class="nav-main-item">
+                <a class="nav-main-link {{ Request::is('consoles/masters/degrees*') ? 'active' : '' }}" href="{{ route('degrees.index') }}">
+                  <span class="nav-main-link-name">{{ trans('page.degrees.title') }}</span>
+                </a>
+              </li>
+              @endcan
             </ul>
           </li>
           @endcan

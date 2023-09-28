@@ -35,4 +35,13 @@ return [
     'show' => 'Detail Data Gangguan',
     'delete' => 'Hapus Gangguan',
   ],
+
+  'degrees' => [
+    'title' => 'Derajat',
+    'index' => 'Daftar Data Derajat',
+    'create' => 'Tambah Data Derajat',
+    'edit' => 'Ubah Data Derajat',
+    'show' => 'Detail Data Derajat',
+    'delete' => 'Hapus Derajat',
+  ],
 ];

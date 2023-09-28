@@ -73,3 +73,25 @@ Breadcrumbs::for('disturbances.show', function (BreadcrumbTrail $trail, $disturb
   $trail->push(trans('page.disturbances.show'), route('disturbances.show', $disturbance->uuid));
 });
 // Disturbances Breadcrumbs
+
+// degrees Breadcrumbs
+Breadcrumbs::for('degrees.index', function (BreadcrumbTrail $trail) {
+  $trail->parent('home');
+  $trail->push(trans('page.degrees.index'), route('degrees.index'));
+});
+
+Breadcrumbs::for('degrees.create', function (BreadcrumbTrail $trail) {
+  $trail->parent('degrees.index');
+  $trail->push(trans('page.degrees.create'), route('degrees.create'));
+});
+
+Breadcrumbs::for('degrees.edit', function (BreadcrumbTrail $trail, $degree) {
+  $trail->parent('degrees.index');
+  $trail->push(trans('page.degrees.edit'), route('degrees.edit', $degree->uuid));
+});
+
+Breadcrumbs::for('degrees.show', function (BreadcrumbTrail $trail, $degree) {
+  $trail->parent('degrees.index');
+  $trail->push(trans('page.degrees.show'), route('degrees.show', $degree->uuid));
+});
+// degrees Breadcrumbs
