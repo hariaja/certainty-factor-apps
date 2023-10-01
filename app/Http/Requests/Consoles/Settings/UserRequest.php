@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
         Rule::unique('users', 'email')->ignore($this->user),
       ],
       'file' => 'nullable|mimes:jpg,png|max:3048',
-      'roles' => 'required|' . RoleType::toValidation(0, 2),
+      'roles' => 'required|' . RoleType::toValidation(),
     ];
 
     return $rules;

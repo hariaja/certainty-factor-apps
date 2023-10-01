@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Helpers\Enums\RoleType;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,11 @@ trait HandleChangePassword
    */
   public function showChangePasswordForm(User $user)
   {
-    return view('consoles.settings.passwords.edit', compact('user'));
+    if ($user->getRoleName() === RoleType::ADMIN->value) :
+      return view('consoles.settings.passwords.edit', compact('user'));
+    else :
+      return view('users.settings.passwords.edit', compact('user'));
+    endif;
   }
 
   public function store(PasswordRequest $request)
