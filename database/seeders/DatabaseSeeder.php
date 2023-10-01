@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
       UserSeeder::class,
       DisturbanceSeeder::class,
       DegreeSeeder::class,
+      SymptomSeeder::class,
     ]);
   }
 }

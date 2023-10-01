@@ -4,10 +4,11 @@ use App\Helpers\Enums\RoleType;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Consoles\HomeController;
 use App\Http\Controllers\Consoles\Master\DegreeController;
-use App\Http\Controllers\Consoles\Master\DisturbanceController;
 use App\Http\Controllers\Consoles\Settings\RoleController;
 use App\Http\Controllers\Consoles\Settings\UserController;
+use App\Http\Controllers\Consoles\Master\SymptomController;
 use App\Http\Controllers\Consoles\Settings\PasswordController;
+use App\Http\Controllers\Consoles\Master\DisturbanceController;
 
 // Define Role
 $roles = implode(',', [RoleType::ADMIN->value, RoleType::OFFICER->value]);
@@ -41,6 +42,7 @@ Route::prefix('consoles')->group(function () use ($roles) {
     Route::prefix('masters')->group(function () {
       Route::resource('disturbances', DisturbanceController::class);
       Route::resource('degrees', DegreeController::class)->except('show');
+      Route::resource('symptoms', SymptomController::class);
     });
   });
 });

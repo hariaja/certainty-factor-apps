@@ -6,7 +6,7 @@ class PermissionList
 {
   public static function listPermissions()
   {
-    // Ini adalah permissions atau hak akses yang 
+    // Ini adalah permissions atau hak akses yang
     // diberikan berdasarkan nama route dan di kategorikan berdasarkan nama permission category
 
     return [
@@ -40,6 +40,15 @@ class PermissionList
       'degrees.edit',
       'degrees.update',
       'degrees.destroy',
+
+      // Halaman Symptom
+      'symptoms.index',
+      'symptoms.create',
+      'symptoms.store',
+      'symptoms.show',
+      'symptoms.edit',
+      'symptoms.update',
+      'symptoms.destroy',
     ];
   }
 }

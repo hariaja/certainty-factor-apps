@@ -95,3 +95,25 @@ Breadcrumbs::for('degrees.show', function (BreadcrumbTrail $trail, $degree) {
   $trail->push(trans('page.degrees.show'), route('degrees.show', $degree->uuid));
 });
 // degrees Breadcrumbs
+
+// Symptoms Breadcrumbs
+Breadcrumbs::for('symptoms.index', function (BreadcrumbTrail $trail) {
+  $trail->parent('home');
+  $trail->push(trans('page.symptoms.index'), route('symptoms.index'));
+});
+
+Breadcrumbs::for('symptoms.create', function (BreadcrumbTrail $trail) {
+  $trail->parent('symptoms.index');
+  $trail->push(trans('page.symptoms.create'), route('symptoms.create'));
+});
+
+Breadcrumbs::for('symptoms.edit', function (BreadcrumbTrail $trail, $symptom) {
+  $trail->parent('symptoms.index');
+  $trail->push(trans('page.symptoms.edit'), route('symptoms.edit', $symptom->uuid));
+});
+
+Breadcrumbs::for('symptoms.show', function (BreadcrumbTrail $trail, $symptom) {
+  $trail->parent('symptoms.index');
+  $trail->push(trans('page.symptoms.show'), route('symptoms.show', $symptom->uuid));
+});
+// Symptoms Breadcrumbs

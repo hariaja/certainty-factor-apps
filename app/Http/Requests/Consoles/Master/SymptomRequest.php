@@ -5,7 +5,7 @@ namespace App\Http\Requests\Consoles\Master;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class DisturbanceRequest extends FormRequest
+class SymptomRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -24,14 +24,15 @@ class DisturbanceRequest extends FormRequest
   {
     return [
       'code' => [
-        'required', 'string', 'regex:/^P\d+(,P\d+)*$/',
-        Rule::unique('disturbances', 'code')->ignore($this->disturbance),
+        'required', 'string', 'regex:/^G\d+(,G\d+)*$/',
+        Rule::unique('symptoms', 'code')->ignore($this->symptom)
       ],
-      'name' => [
-        'required', 'string', 'max:100',
-        Rule::unique('disturbances', 'name')->ignore($this->disturbance),
+      'description' => [
+        'required', 'string',
+        Rule::unique('symptoms', 'description')->ignore($this->symptom)
       ],
-      'description' => 'required|string|max:255',
+      'point' => 'required|numeric',
+      'disturbance' => 'required|regex:/^P\d+(,P\d+)*$/',
     ];
   }
 
@@ -50,6 +51,8 @@ class DisturbanceRequest extends FormRequest
       '*.numeric' => ':attribute input tidak valid atau harus berupa angka',
       '*.image' => ':attribute tidak valid, pastikan memilih gambar',
       '*.mimes' => ':attribute tidak valid, masukkan gambar dengan format jpg atau png',
+      'code.regex' => ':attribute harus berupa "G1, G2, dst..."',
+      'disturbance.regex' => ':attribute harus berupa "P1, P2, dst..."',
     ];
   }
 
@@ -62,8 +65,9 @@ class DisturbanceRequest extends FormRequest
   {
     return [
       'code' => 'Kode',
-      'name' => 'Nama',
       'description' => 'Deskripsi',
+      'point' => 'Nilai CF',
+      'disturbance' => 'Gejala',
     ];
   }
 }

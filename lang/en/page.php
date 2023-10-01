@@ -44,4 +44,13 @@ return [
     'show' => 'Detail Data Derajat',
     'delete' => 'Hapus Derajat',
   ],
+
+  'symptoms' => [
+    'title' => 'Gejela',
+    'index' => 'Daftar Data Gejela',
+    'create' => 'Tambah Data Gejela',
+    'edit' => 'Ubah Data Gejela',
+    'show' => 'Detail Data Gejela',
+    'delete' => 'Hapus Gejela',
+  ],
 ];

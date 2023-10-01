@@ -12,4 +12,5 @@ enum PermissionCategoryList: string
   case ROLES = 'roles.name';
   case DISTURBANCES = 'disturbances.name';
   case DEGREES = 'degrees.name';
+  case SYMPTOMS = 'symptoms.name';
 }

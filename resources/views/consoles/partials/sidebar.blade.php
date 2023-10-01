@@ -91,17 +91,24 @@
               <span class="nav-main-link-name">{{ trans('Kondisi') }}</span>
             </a>
             <ul class="nav-main-submenu">
-              @can('disturbances.index')
-              <li class="nav-main-item">
-                <a class="nav-main-link {{ Request::is('consoles/masters/disturbances*') ? 'active' : '' }}" href="{{ route('disturbances.index') }}">
-                  <span class="nav-main-link-name">{{ trans('page.disturbances.title') }}</span>
-                </a>
-              </li>
-              @endcan
               @can('degrees.index')
               <li class="nav-main-item">
                 <a class="nav-main-link {{ Request::is('consoles/masters/degrees*') ? 'active' : '' }}" href="{{ route('degrees.index') }}">
                   <span class="nav-main-link-name">{{ trans('page.degrees.title') }}</span>
+                </a>
+              </li>
+              @endcan
+              @can('symptoms.index')
+              <li class="nav-main-item">
+                <a class="nav-main-link {{ Request::is('consoles/masters/symptoms*') ? 'active' : '' }}" href="{{ route('symptoms.index') }}">
+                  <span class="nav-main-link-name">{{ trans('page.symptoms.title') }}</span>
+                </a>
+              </li>
+              @endcan
+              @can('disturbances.index')
+              <li class="nav-main-item">
+                <a class="nav-main-link {{ Request::is('consoles/masters/disturbances*') ? 'active' : '' }}" href="{{ route('disturbances.index') }}">
+                  <span class="nav-main-link-name">{{ trans('page.disturbances.title') }}</span>
                 </a>
               </li>
               @endcan
